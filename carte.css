@@ -1,0 +1,157 @@
+/* Global */
+* {
+    margin: 0; /* On enlève les marges et le padding par défaut */
+    padding: 0;
+}
+
+
+html { /* Pour appliquer un fond de couleur en gradient à toute la page */
+    height: 100%; /* Sinon pas de fond */
+    background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(111,111,201,1) 0%, rgba(45,171,233,1) 66%, rgba(0,212,255,1) 100%); 
+    font-family: 'Red Hat Display', sans-serif; /* La police utilisé sur tout le site */
+}
+
+
+/* Cadre photo */
+.photo {
+    margin: auto; /* Permet de centrer */
+    margin-top: 20px;
+    width: 180px; /* Dimensions du cercle bleu */
+    height: 180px;
+    border: 4px solid #03BFCB; /* épaisseur */
+	border-radius: 50%; /* Pour arrondir en cercle */
+}
+
+
+/* Textes */
+h1{
+    color: #03BFCB;
+    margin-top: 30px;
+    font-size: 2.8em;
+}
+
+h2{
+    font-style: italic;
+    font-weight: 200;
+    margin-top: 15px;
+    font-size: 2em;
+}
+
+h3{
+    margin-top: 20px;
+    font-size: 1.7em;
+}
+
+li{
+    margin-top: 12px; /* Pour espacer entre les puces */
+    font-size: 1.2em;
+}
+
+p{
+    margin-top: 30px;
+    font-size: 1.2em;   
+}
+
+
+/* Liens  */
+.liens {
+    list-style-type: none; /* Pour cacher les puces des liens github et linkedin */
+    display: flex;
+    justify-content:center; /* Centre horizontalement */
+}
+
+.liens li{
+    margin: 15px; /* créé espacement entre les liens */
+}
+
+.liens li:hover{
+    transform: scale(1.2) /* Crée un effet de zoom au survol pour indiquer que l'élément est clickable  */
+}
+
+.raisons ul {
+    text-align: left; /* aligne les puces à gauche */
+    list-style-position: inside; /* Permet d'aligner avec les puces incluses, sinon centre que le texte sans les puces */
+    display: inline-block; 
+}
+
+a{
+    text-decoration: none; /* Cache le surlignage des liens*/
+}
+
+.contact {
+    display: inline-block;
+    width: 100%;
+    margin-top: 10px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    color: white;
+    background-color: #222152;
+    text-align: center; 
+    font-size: 1.7em;
+}
+
+.contact:hover {
+    background-color: #03BFCB; /* change la couleur de fond sur le bouton contact au survol*/
+}
+
+/* Conteneur de la carte, ses dimensions et l'effet pour la retourner */
+.card {
+    position: absolute; /* élément retiré du flux de la page pour ne pas interférer, comme ça il reste où il est */
+    left: 50%; /* Pour centrer */
+    top: 50%; /* Pour centrer */
+    transform: translate(-50%, -50%); /*pour centrer à partir du centre de la carte plutôt que son coin supérieur gauche*/
+    width: 340px; /* Dimensions de la carte */
+    height: 500px;
+    perspective: 1000px; /* crée un effet 3D en retournant la carte. Plus la valeur est faible plus l'effet est exagéré*/
+}
+
+.interieur {  /* Pour positionner les côtés de la carte */
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s; /* Pour passer d'un côté à l'autre selon un temps défini */
+    transform-style: preserve-3d; /* Maintient les élements en 3D pendant la rotation */
+}
+
+.card:hover .interieur { /* Pour retourner la carte sur l'axe horizontal à son survol */
+    transform: rotateY(180deg);
+}
+
+.front, .back {
+    position: absolute;
+    width: 100%; /* Permet d'éviter le débordement de la carte */
+    height: 100%;
+    backface-visibility: hidden; /* Pour cacher le côté de la carte qui ne doit pas être visible */
+}
+
+/* Couleurs de fond et de police pour les deux côtés */
+.front {
+    background-color: #222152;
+    color: white;
+}
+
+.back {
+    background-color: white;
+    color: black;
+    transform: rotateY(180deg); 
+}
+
+
+/* Pied de page */
+footer{ /* Position et style du pied de page copyright */
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;       
+    color: white;
+}
+
+
+/* Mobile */
+/* Si le hover n'est pas disponible (mobile notamment), permet à l'utilisateur de retourner la carte en maintenant le toucher */
+@media (hover: none) {
+    .card:active .interieur {
+        transform: rotateY(180deg);
+    }
+}
